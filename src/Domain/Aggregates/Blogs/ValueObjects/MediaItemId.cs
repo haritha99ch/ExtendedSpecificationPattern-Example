@@ -1,4 +1,4 @@
 ﻿using Domain.Common.Entities;
 
 namespace Domain.Aggregates.Blogs.ValueObjects;
-public record ImageId(Guid Value) : EntityId(Value);
+public record MediaItemId(Guid Value) : EntityId(Value);
