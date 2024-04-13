@@ -3,7 +3,7 @@ using Domain.Aggregates.Blogs;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Infrastructure.Contexts;
+namespace Infrastructure.Context;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<Account> Accounts { get; set; } = default!;

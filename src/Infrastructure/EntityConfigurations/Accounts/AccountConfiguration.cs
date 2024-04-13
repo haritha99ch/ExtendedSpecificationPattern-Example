@@ -20,7 +20,7 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
 
         builder.Property(a => a.PhoneNumber).IsRequired().HasMaxLength(20);
 
-        builder.OwnsOne<User>(a => a.User, navBuilder => navBuilder.Configure());
+        builder.OwnsOne<User>(a => a.User, navBuilder => navBuilder.Configure()).Navigation(a => a.User);
 
         builder.Property(a => a.CreatedAt).IsRequired();
 

@@ -5,11 +5,11 @@ using System.Reflection;
 namespace ApplicationSettings.Helpers;
 public static class OptionsLocator
 {
-    public static TOptions GetOptions<TOptions>(this IServiceCollection serviceCollection)
+    public static TOptions GetApplicationOptions<TOptions>(this IServiceCollection serviceCollection)
         where TOptions : class, IApplicationOptions, new()
-        => serviceCollection.BuildServiceProvider().GetOptions<TOptions>();
+        => serviceCollection.BuildServiceProvider().GetApplicationOptions<TOptions>();
 
-    public static TOptions GetOptions<TOptions>(this IServiceProvider serviceProvider)
+    public static TOptions GetApplicationOptions<TOptions>(this IServiceProvider serviceProvider)
         where TOptions : class, IApplicationOptions, new()
     {
         var options = serviceProvider.GetService<IOptions<TOptions>>()?.Value;

@@ -1,5 +1,6 @@
 ﻿using Domain.Aggregates.Accounts;
 using Domain.Aggregates.Accounts.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.EntityConfigurations.Accounts.Entities;
@@ -7,6 +8,8 @@ internal static class UserConfiguration
 {
     public static void Configure(this OwnedNavigationBuilder<Account, User> builder)
     {
+        builder.ToTable($"{nameof(User)}s");
+
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasConversion(id => id.Value, value => new(value));
 
