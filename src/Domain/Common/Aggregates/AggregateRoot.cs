@@ -1,8 +1,9 @@
 ﻿using Domain.Common.Entities;
+using Domain.Contracts.Aggregates;
 using Domain.Contracts.Entities;
 
 namespace Domain.Common.Aggregates;
-public abstract record AggregateRoot<TEntityId> : Entity<TEntityId> where TEntityId : EntityId
+public abstract record AggregateRoot<TEntityId> : Entity<TEntityId>, IAggregateRoot where TEntityId : EntityId
 {
     public List<IDomainEvent> DomainEvents { get; } = [];
 
