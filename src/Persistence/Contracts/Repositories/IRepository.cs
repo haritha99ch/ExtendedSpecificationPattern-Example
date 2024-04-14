@@ -1,7 +1,7 @@
 ﻿using Domain.Common.Aggregates;
 using Domain.Common.Entities;
 using Persistence.Common.Specifications;
-using Persistence.Contracts.Selectors;
+using Shared.Contracts.Selectors;
 
 namespace Persistence.Contracts.Repositories;
 public interface IRepository<TEntity, in TEntityId> where TEntity : AggregateRoot<TEntityId> where TEntityId : EntityId

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApplicationSettings.Options;
+﻿namespace ApplicationSettings.Options;
 public sealed class SqlServerOptions : IApplicationOptions
 {
     [Required]

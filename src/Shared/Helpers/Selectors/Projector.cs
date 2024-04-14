@@ -1,9 +1,9 @@
 ﻿using Domain.Common.Entities;
-using Persistence.Contracts.Selectors;
+using Shared.Contracts.Selectors;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-namespace Persistence.Helpers.Selectors;
+namespace Shared.Helpers.Selectors;
 public static class Projector
 {
     public static Expression<Func<TEntity, TResult>> GetProjection<TEntity, TResult>()

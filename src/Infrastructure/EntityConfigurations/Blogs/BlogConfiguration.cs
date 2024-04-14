@@ -21,8 +21,8 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
         builder.Property(b => b.Description).IsRequired();
 
 
-        builder.OwnsMany(b => b.MediaItems, navBuilder => navBuilder.Configure())
-            .Navigation(b => b.MediaItems)
+        builder.OwnsOne(b => b.MediaItem, navBuilder => navBuilder.Configure())
+            .Navigation(b => b.MediaItem)
             .AutoInclude(false);
 
         builder.OwnsMany(b => b.Posts, navBuilder => navBuilder.Configure())

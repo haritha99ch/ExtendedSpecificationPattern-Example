@@ -4,8 +4,8 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Common.Specifications;
 using Persistence.Contracts.Repositories;
-using Persistence.Contracts.Selectors;
 using Persistence.Helpers.Specifications;
+using Shared.Contracts.Selectors;
 using System.Linq.Expressions;
 
 namespace Persistence.Repositories;

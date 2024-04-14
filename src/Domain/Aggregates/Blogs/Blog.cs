@@ -3,6 +3,7 @@ using Domain.Aggregates.Accounts.ValueObjects;
 using Domain.Aggregates.Blogs.Entities;
 using Domain.Aggregates.Blogs.ValueObjects;
 using Domain.Common.Aggregates;
+using Domain.Models.Blogs;
 
 namespace Domain.Aggregates.Blogs;
 public record Blog : AggregateRoot<BlogId>
@@ -10,19 +11,21 @@ public record Blog : AggregateRoot<BlogId>
     public AccountId? AccountId { get; init; }
     public required string Title { get; set; }
     public required string Description { get; set; }
-    public List<MediaItem> MediaItems { get; init; } = [];
+    public MediaItem? MediaItem { get; init; }
     public List<Post> Posts { get; init; } = [];
 
     public Account? Account { get; init; }
 
-    public static Blog Create(AccountId accountId, string title, string description) => new()
-    {
-        Id = new(Guid.NewGuid()),
-        AccountId = accountId,
-        Title = title,
-        Description = description,
-        CreatedAt = DateTime.Now
-    };
+    public static Blog Create(AccountId accountId, string title, string description, MediaItemUpload mediaItemUpload)
+        => new()
+        {
+            Id = new(Guid.NewGuid()),
+            AccountId = accountId,
+            Title = title,
+            Description = description,
+            MediaItem = MediaItem.Create(mediaItemUpload.Url, mediaItemUpload.Type),
+            CreatedAt = DateTime.Now
+        };
 
     public Blog Update(string title, string description)
     {
@@ -31,16 +34,8 @@ public record Blog : AggregateRoot<BlogId>
         return this;
     }
 
-    public MediaItem AddMediaItem(string url, string type)
-    {
-        var mediaItem = MediaItem.Create(url, type);
-        MediaItems.Add(mediaItem);
-        return mediaItem;
-    }
-
-    public void RemoveMediaItem(MediaItemId mediaItemId) => MediaItems.RemoveAll(m => m.Id.Equals(mediaItemId));
-    public MediaItem UpdateMediaItem(MediaItemId mediaItemId, string url, string type)
-        => MediaItems.First(m => m.Id.Equals(mediaItemId)).Update(url, type);
+    public MediaItem UpdateMediaItem(MediaItemUpload mediaItemUpload)
+        => MediaItem!.Update(mediaItemUpload.Url, mediaItemUpload.Type);
 
     public Post AddPost(string title, string content)
     {
@@ -56,10 +51,10 @@ public record Blog : AggregateRoot<BlogId>
         return mediaItem;
     }
 
-    public MediaItem UpdateMediaItemInPost(PostId postId, MediaItemId mediaItemId, string url, string type)
+    public MediaItem UpdateMediaItemInPost(PostId postId, MediaItemId mediaItemId, MediaItemUpload mediaItemUpload)
     {
         var post = GetPostById(postId);
-        var mediaItem = post.UpdateMediaItem(mediaItemId, url, type);
+        var mediaItem = post.UpdateMediaItem(mediaItemId, mediaItemUpload.Url, mediaItemUpload.Type);
         return mediaItem;
     }
 
