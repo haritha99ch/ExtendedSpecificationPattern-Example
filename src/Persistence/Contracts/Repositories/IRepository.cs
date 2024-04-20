@@ -38,14 +38,12 @@ public interface IRepository<TEntity, in TEntityId> where TEntity : AggregateRoo
     Task<TResult?> GetOneAsync<TSpecification, TResult>(
             TSpecification specification,
             CancellationToken cancellationToken = default
-        ) where TSpecification : Specification<TEntity, TResult>
-        where TResult : ISelector;
+        ) where TSpecification : Specification<TEntity, TResult> where TResult : ISelector;
 
     Task<List<TResult>> GetManyAsync<TSpecification, TResult>(
             TSpecification specification,
             CancellationToken cancellationToken = default
-        ) where TSpecification : Specification<TEntity, TResult>
-        where TResult : ISelector;
+        ) where TSpecification : Specification<TEntity, TResult> where TResult : ISelector;
 
     IRepository<TEntity, TEntityId> AsTracking();
 }

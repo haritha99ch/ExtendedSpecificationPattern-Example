@@ -1,7 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using Domain.Contracts.Aggregates;
+using Shared.Contracts.Selectors;
+using System.Linq.Expressions;
 
 namespace Persistence.Common.Utilities;
-public readonly struct Select<TEntity, TResult>
+public readonly struct Select<TEntity, TResult> where TEntity : IAggregateRoot where TResult : ISelector
 {
     private readonly Expression<Func<TEntity, TResult>>? _selectSingle;
     private readonly Expression<Func<TEntity, IEnumerable<TResult>>>? _selectMany;

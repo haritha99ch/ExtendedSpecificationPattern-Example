@@ -1,6 +1,7 @@
 ﻿using Domain.Contracts.Aggregates;
 using Microsoft.EntityFrameworkCore.Query;
 using Persistence.Common.Utilities;
+using Shared.Contracts.Selectors;
 using System.Linq.Expressions;
 
 namespace Persistence.Common.Specifications;
@@ -32,7 +33,7 @@ public abstract class Specification<TEntity> where TEntity : IAggregateRoot
 }
 
 public abstract class Specification<TEntity, TResult>
-    where TEntity : IAggregateRoot
+    where TEntity : IAggregateRoot where TResult : ISelector
 {
     public Expression<Func<TEntity, bool>>? Criteria { get; }
     public List<Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>> Includes { get; } = [];

@@ -1,9 +1,9 @@
-﻿using Domain.Models.Blogs;
+﻿using Shared.Contracts.Selectors;
 
 namespace Shared.Models.Blogs;
-public class BlogDetails
+public class BlogDetails : ISelector
 {
     public required string Title { get; set; }
     public required string Description { get; set; }
-    public List<MediaItemUpload> Images { get; set; } = [];
+    public required MediaItemUrl MediaItem { get; set; }
 }

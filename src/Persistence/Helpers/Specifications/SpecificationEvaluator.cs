@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts.Aggregates;
 using Persistence.Common.Specifications;
+using Shared.Contracts.Selectors;
 
 namespace Persistence.Helpers.Specifications;
 internal static class SpecificationEvaluator
@@ -34,7 +35,7 @@ internal static class SpecificationEvaluator
             this IQueryable<TEntity> query,
             Specification<TEntity, TResult> specification
         )
-        where TEntity : IAggregateRoot
+        where TEntity : IAggregateRoot where TResult : ISelector
     {
         query = specification.Includes.Aggregate(query, (current, include) => include(current));
         if (specification.Criteria is { } criteria)
