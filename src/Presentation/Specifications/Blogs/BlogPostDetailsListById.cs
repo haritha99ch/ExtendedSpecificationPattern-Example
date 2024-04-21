@@ -13,7 +13,6 @@ public class BlogPostDetailsListById : Specification<Blog, BlogPostDetails>
                 Caption = p.Caption,
                 Content = p.Content,
                 MediaItems = p.MediaItems.AsQueryable().Select(m => new MediaItemUrl { Url = m.Url }).ToList()
-            })
-            .ToList());
+            }));
     }
 }
